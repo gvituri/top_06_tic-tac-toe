@@ -1,18 +1,12 @@
-=begin
-    Tic Tac Toe
+require_relative 'player.rb'
 
-=end
-def print_board(play_sheet)
-    HEADER = "   A   B   C "
-    ROW_SEPARATOR = "  ---|---|---"
-end
 
 TEST_MATRIX = [
     "   A   B   C ",
     "0  - | - | - ",
-    "  ---|---|---",
+    "  ---+---+---",
     "1  - | - | - ",
-    "  ---|---|---",
+    "  ---+---+---",
     "2  - | - | - "
 ]
 
