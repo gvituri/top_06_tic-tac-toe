@@ -1,19 +1,22 @@
 require_relative 'display.rb'
+require_relative 'match.rb'
 
 module Tictactoe
 
-    @@match_mode = nil
-    @@rounds = nil
-    @@computer_level = nil
+    @@match = nil
 
     @@player_one = nil
     @@player_two = nil
 
     def self.setup_game
         puts "game setup"
+        match_mode = nil
         puts "gets type of match"
+        computer_level = nil
         puts "gets computer dificulty if PVC"
+        best_of = nil
         puts "gets number of rounds"
+        @@match = Match.new(match_mode, computer_level, best_of)
         puts "gets player one name and symbol"
         puts "gets player two name and symble"
     end
@@ -23,21 +26,14 @@ module Tictactoe
         puts "start round"
     end
 
-    def self.start_game_loop
-        
-        change_setup = true
-        
-        if change_setup
-            setup_game
-        end
-        
+    def self.start_game
+        setup_game  
         start_match
-        
     end
 
     def self.boot_game
         Display.welcome
-        start_game_loop
+        start_game
     end
 end
 

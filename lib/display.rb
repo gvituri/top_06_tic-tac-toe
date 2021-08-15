@@ -12,4 +12,14 @@ module Display
         Dialogue.welcome
     end
 
+    def self.setup
+        clear_display
+        match_mode = Dialogue.setup_match_mode
+
+        p match_mode
+    end
+
 end
+
+Display.setup
+
