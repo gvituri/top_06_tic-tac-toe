@@ -9,16 +9,13 @@ module Tictactoe
     @@player_two = nil
 
     def self.setup_game
-        puts "game setup"
-        match_mode = nil
-        puts "gets type of match"
-        computer_level = nil
-        puts "gets computer dificulty if PVC"
-        best_of = nil
-        puts "gets number of rounds"
-        @@match = Match.new(match_mode, computer_level, best_of)
+        @@match = Display.setup_match
         puts "gets player one name and symbol"
         puts "gets player two name and symble"
+
+        p @@match.mode
+        p @@match.computer_level
+        p @@match.round_number
     end
 
     def self.start_match

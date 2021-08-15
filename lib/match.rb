@@ -1,7 +1,10 @@
 class Match
-    def initialize(mode,computer_level = 0, best_of)
+
+    attr_accessor :mode, :computer_level, :round_number
+
+    def initialize(mode, computer_level, round_number)
         @mode = mode
         @computer_level = computer_level
-        @best_of = best_of
+        @round_number = round_number
     end
 end
