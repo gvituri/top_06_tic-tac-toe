@@ -25,10 +25,24 @@ module Display
         return Match.new(match_mode, match_computer, match_rounds)
     end
 
-    def self.setup_player
-        player_name = Dialogue.print_dialogue(:setup_player_name)
-        player_symbol = Dialogue.print_dialogue(:setup_player_symbol)
+    def self.setup_player(existing_name = nil, existing_symbol = nil)
+        player_name = nil
+        player_symbol = nil
+
+        loop do
+            player_name = Dialogue.print_dialogue(:setup_player_name)
+            break unless player_name == existing_name
+        end
+        loop do
+            loop do
+                player_symbol = Dialogue.print_dialogue(:setup_player_symbol)
+                break if player_symbol.length == 1
+            end
+            break unless player_symbol == existing_symbol
+        end
+
         return Player.new(player_name, player_symbol)
+
     end
 
 end

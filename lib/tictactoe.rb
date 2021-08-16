@@ -9,27 +9,18 @@ module Tictactoe
     @@player_two = nil
 
     def self.setup_game
+        
         @@match = Display.setup_match
+        
         puts "\nSetting up Player 1."
         @@player_one = Display.setup_player
+
         @@match.pick_computer_symbol(@@player_one)
+
         unless @@match.mode == "pvc"
-            loop do
-                #TODO - Refactor to make it CHANGE the instance and not MAKE A NEW ONE
-                #       Also, refactor to test both name AND symbol between players
-                #       Also, make the setting of the symble to be made in the player class?
-                #       then be able to test if the string has only one character
-
-                puts "\nSetting up Player 2."
-                puts "Make sure name and symble to not match player's one."
-                
-                @@player_two = Display.setup_player
-
-                name_one = @@player_one.name
-                name_two = @@player_two.name
-
-                break unless name_two == name_one
-            end
+            puts "\nSetting up Player 2."
+            puts "Make sure name and symbol do no match with Player's one."
+            @@player_two = Display.setup_player(@@player_one.name, @@player_one.symbol)
         end
     end
 
