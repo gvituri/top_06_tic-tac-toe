@@ -15,6 +15,10 @@ module Dialogue
             "hard"]],
         setup_rounds: [["1", "2", "3", "4", "5"],
             ["Chose the number of rounds between 1 and 5:"]],
+        setup_player_name: [["none"],
+            ["Input player's name:"]],
+        setup_player_symbol: [["none"], 
+            ["Input player's symble:"]]
     }
 
     def self.check_input(input, dictionary)
@@ -37,6 +41,8 @@ module Dialogue
     def self.print_dialogue(dialogue_section)
         dictionary_array = @@Dialogue_pool[dialogue_section][0]
         dialogue_array = @@Dialogue_pool[dialogue_section][1]
+
+        puts "\n"
         
         dialogue_array.each do |phrase|
             puts phrase
@@ -48,5 +54,7 @@ module Dialogue
             player_input = check_input(player_input, dictionary_array)
             return player_input
         end
+
+        return player_input
     end
 end
