@@ -1,4 +1,5 @@
 require_relative 'tictactoe.rb'
+require_relative 'computer.rb'
 class Match
 
     attr_accessor :mode, :computer_level, :computer_symbol, :round_number
