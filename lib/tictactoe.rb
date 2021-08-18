@@ -28,6 +28,8 @@ module Tictactoe
             puts "Make sure name and symbol do no match with Player's one."
             @@player_two = Display.setup_player(@@player_one.name, @@player_one.symbol)
         end
+
+        @@board = Board.new
     end
 
     def self.change_setup
@@ -46,10 +48,16 @@ module Tictactoe
 
         @@match.round_number.times do
             Display.clear_display
-            puts "\n Start of Round!"
+            puts "Start of Round!"
 
             9.times do
-                move = match_players[0].make_move
+                move = nil
+                puts @@board.print_board
+                loop do
+                    move = match_players[0].make_move
+                    break if @@board.validate_move(move)
+                end
+                @@board.register_move(move, match_players[0].symbol)
                 #test move against the board
                 match_players = match_players.reverse()
             end

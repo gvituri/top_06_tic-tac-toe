@@ -35,7 +35,7 @@ module Display
         end
         loop do
             loop do
-                player_symbol = Dialogue.print_dialogue(:setup_player_symbol)
+                player_symbol = Dialogue.print_dialogue(:setup_player_symbol).strip
                 break if player_symbol.length == 1
             end
             break unless player_symbol == existing_symbol

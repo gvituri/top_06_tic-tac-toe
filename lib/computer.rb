@@ -14,6 +14,18 @@ class Computer
     end
 
     def make_move
-        puts "Asks for #{@name} move"
+        puts "\n#{@name}'s turn."
+        puts "Picking a move."
+        sleep(1)
+
+        case @level
+            when "easy"
+                puts "makes easy move"
+            when "medium"
+                puts "makes medium move"
+            else
+                puts "makes hard move"
+        end
+
     end
 end
