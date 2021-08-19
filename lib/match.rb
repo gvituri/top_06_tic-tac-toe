@@ -1,20 +1,29 @@
-require_relative 'tictactoe.rb'
-require_relative 'computer.rb'
+require_relative 'input_check.rb'
+
 class Match
+    include InputCheck
+    attr_accessor :mode, :round_number, :scores
 
-    attr_accessor :mode, :computer_level, :computer_symbol, :round_number
-
-    def initialize(mode, computer_level, round_number)
-        @mode = mode
-        @computer_level = computer_level
-        @computer_symbol = nil
-        @round_number = round_number.to_i
+    def initialize
+        @mode = setup_mode
+        @round_number = setup_rounds
+        @scores = setup_scores
     end
 
-    def pick_computer_symbol(player_one)
-        symbol_array = ["X", "O"]
-        symbol_array.each do |symbol|
-            @computer_symbol = symbol unless symbol == player_one.symbol
-        end
+    def setup_mode
+        self.input_check
+        return "mode"
+    end
+
+    def setup_rounds
+        self.input_check
+        return "x rounds"
+    end
+
+    def setup_scores
+        #should return a hash with
+        #   key     value
+        #   p_name  wins
+        return "scores"
     end
 end

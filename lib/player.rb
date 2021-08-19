@@ -1,34 +1,25 @@
-class Player
+require_relative 'input_check.rb'
 
+class Player
+    include InputCheck
     attr_accessor :name, :symbol
 
-    def initialize(name, symbol)
-        @name = name
-        @symbol = symbol
+    def initialize
+        @name = setup_name
+        @symbol = setpup_symbol
+    end
+
+    def setup_name
+        self.input_check
+        return "name"
+    end
+
+    def setpup_symbol
+        self.input_check
+        return "symbol"
     end
 
     def make_move
-        move_input = nil
-
-        puts "#{@name} it is your turn."
-        puts "Please, state the coordinate of your move (ex: a2, C0)."
-        loop do
-            move_input = gets.chomp.downcase.split("")
-
-            unless move_input.length == 2
-                puts "Invalid coordinate."
-                puts "Try again.\n"
-                next
-            end
-            
-            valid_x = move_input[0]
-            valid_y = move_input[1]
-            break if (valid_x.ord.between?(97, 99) && valid_y.ord.between?(48, 50))
-            puts "Invalid coordinate."
-            puts "Try again.\n"
-        end
-
-        return move_input
+        #makes move
     end
-
 end

@@ -1,3 +1,3 @@
-require_relative './lib/tictactoe.rb'
+require_relative './lib/game.rb'
 
-Tictactoe.boot_game
+Game.boot_game

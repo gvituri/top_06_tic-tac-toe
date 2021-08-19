@@ -1,31 +1,30 @@
-class Computer
+require_relative 'input_check.rb'
+
+class Computer < Player
+    include InputCheck
     attr_accessor :name, :symbol, :level
 
-    def initialize(symbol, level)
-        @name = randomize_name
-        @symbol = symbol
-        @level = level
+    def initialize
+        super
+        @level = setpup_level
     end
 
-    def randomize_name
-        name_dictionary = ["Optimus", "R2-D2", "C-3PO", "B-9", "Marvin", "Robby, the Robot",
-        "WALL-E", "Iron Giant", "Terminator", "Ultron", "Mars Rover", "Bender"]
-        return name_dictionary.sample
+    def setup_name      
+        self.input_check
+        return "computer_name"
+    end
+
+    def setpup_symbol
+        self.input_check
+        return "computer_symbol"
+    end
+
+    def setpup_level
+        self.input_check
+        return "computer_level"
     end
 
     def make_move
-        puts "\n#{@name}'s turn."
-        puts "Picking a move."
-        sleep(1)
-
-        case @level
-            when "easy"
-                puts "makes easy move"
-            when "medium"
-                puts "makes medium move"
-            else
-                puts "makes hard move"
-        end
-
+        #makes move
     end
 end
