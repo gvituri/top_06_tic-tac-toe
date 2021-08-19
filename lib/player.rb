@@ -1,22 +1,29 @@
-require_relative 'input_check.rb'
+require_relative 'require_input.rb'
+require_relative 'check_input.rb'
 
 class Player
-    include InputCheck
+    include RequireInput
+    include CheckInput
     attr_accessor :name, :symbol
 
+    @@input_player = {
+        require_name: [
+            "long",
+            "Enter your name(10 characters max).",
+            ["empty"],
+            "ERROR - Input is too long.."
+        ],
+        require_symbol: [
+            "symbol",
+            "Enter your symbol(1 character only)",
+            ["empty"],
+            "ERROR - Input is not valid."
+        ],
+    }
+
     def initialize
-        @name = setup_name
-        @symbol = setpup_symbol
-    end
-
-    def setup_name
-        self.input_check
-        return "name"
-    end
-
-    def setpup_symbol
-        self.input_check
-        return "symbol"
+        @name = self.require_input(@@input_player[:require_name])
+        @symbol = self.require_input(@@input_player[:require_symbol])
     end
 
     def make_move

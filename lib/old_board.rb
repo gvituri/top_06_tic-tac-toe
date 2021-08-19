@@ -1,3 +1,4 @@
+=begin
 class Board
 
     attr_accessor :board
@@ -82,3 +83,4 @@ end
     #board[3][1] = A1,[3][3] = B1, [3][5] = C1
     #board[5][1] = A2,[5][3] = B2, [5][5] = C2
 
+=end

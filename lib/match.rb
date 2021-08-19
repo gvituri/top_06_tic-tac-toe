@@ -1,29 +1,33 @@
-require_relative 'input_check.rb'
+require_relative 'require_input.rb'
+require_relative 'check_input.rb'
 
 class Match
-    include InputCheck
+    include RequireInput
+    include CheckInput
     attr_accessor :mode, :round_number, :scores
 
+    @@input_match = {
+        require_mode: [
+            "dictionary",
+            "pvp (player vs player) or pvc (player vs computer)?",
+            ["pvp", "pvc"],
+            "ERROR - Input has no match."
+        ],
+        require_round: [
+            "integer",
+            "number of rounds(1,2,3...)? ",
+            ["empty"],
+            "ERROR - Input is not a positive integer."
+        ],
+    }
+
     def initialize
-        @mode = setup_mode
-        @round_number = setup_rounds
+        @mode = self.require_input(@@input_match[:require_mode])
+        @round_number = self.require_input(@@input_match[:require_round])
         @scores = setup_scores
     end
 
-    def setup_mode
-        self.input_check
-        return "mode"
-    end
-
-    def setup_rounds
-        self.input_check
-        return "x rounds"
-    end
-
     def setup_scores
-        #should return a hash with
-        #   key     value
-        #   p_name  wins
-        return "scores"
+        return {p1: 0, p2: 0}
     end
 end

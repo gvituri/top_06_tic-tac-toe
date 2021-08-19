@@ -1,3 +1,4 @@
+=begin
 class Computer
     attr_accessor :name, :symbol, :level
 
@@ -29,3 +30,5 @@ class Computer
 
     end
 end
+
+=end

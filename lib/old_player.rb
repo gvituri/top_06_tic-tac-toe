@@ -1,3 +1,4 @@
+=begin
 class Player
 
     attr_accessor :name, :symbol
@@ -32,3 +33,5 @@ class Player
     end
 
 end
+
+=end

@@ -1,27 +1,34 @@
-require_relative 'input_check.rb'
+require_relative 'require_input.rb'
+require_relative 'check_input.rb'
 
 class Computer < Player
-    include InputCheck
+    include RequireInput
+    include CheckInput
     attr_accessor :name, :symbol, :level
 
+    @@input_computer = {
+        require_level: [
+            "dictionary",
+            "Computer level: easy, medium or hard?.",
+            ["easy", "medium", "hard"],
+            "ERROR - Input has no match."
+        ],
+    }
+
     def initialize
-        super
-        @level = setpup_level
+        @name = setup_name
+        @symbol = setup_symbol
+        @level = self.require_input(@@input_computer[:require_level])
     end
 
     def setup_name      
-        self.input_check
-        return "computer_name"
+        name_options = ["Optimus", "R2-D2", "C-3PO", "B-9", "Marvin", "Robby, the Robot",
+        "WALL-E", "Iron Giant", "Terminator", "Ultron", "Mars Rover", "Bender"]
+        return name_dictionary.sample
     end
 
-    def setpup_symbol
-        self.input_check
+    def setup_symbol
         return "computer_symbol"
-    end
-
-    def setpup_level
-        self.input_check
-        return "computer_level"
     end
 
     def make_move
