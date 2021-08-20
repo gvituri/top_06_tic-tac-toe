@@ -21,6 +21,10 @@ module CheckInput
     end
 
     def is_integer?(input)
+        if input.to_i <= 0
+            return false
+        end
+
         return Integer(input).is_a? Integer
     end
 
