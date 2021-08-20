@@ -3,25 +3,23 @@ require_relative 'computer.rb'
 require_relative 'match.rb'
 
 module Game
+
+    @@match_players = []
+
     def self.boot_game
         match = Match.new
         player1 = Player.new
-        player2 = Player.new
-        computer = Computer.new
+        @@match_players << player1
 
-        p match.mode
-        p match.round_number
+        if match.mode == "pvc"
+            computer = Computer.new
+            @@match_players << computer
+        else
+            @@match_players << player1
+            player2 = Player.new
+        end
 
-        p player1.name
-        p player1.symbol
-
-        p player2.name
-        p player2.symbol
-
-        p computer.name
-        p computer.symbol
-        p computer.level
+        match.start_match(@@match_players)
     end
-
 end
 

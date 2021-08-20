@@ -1,5 +1,42 @@
 class Board
     attr_reader :name, :symbol, :level
+
+    def initialize
+        @board = [
+            [" ", " ", " "],
+            [" ", " ", " "],
+            [" ", " ", " "]
+        ]
+    end
+
+    def display_board
+        board_grid = [
+            ["   A   B   C "],
+            ["0  ", " ", " | ", " ", " | ", " ", " "],
+            ["  ---+---+---"],
+            ["1  ", " ", " | ", " ", " | ", " ", " "],
+            ["  ---+---+---"],
+            ["2  ", " ", " | ", " ", " | ", " ", " "]
+        ]
+
+        i = 1
+        j = 1
+
+        @board.each do |row|
+            row.each do |space|
+                board_grid[i][j] = space
+
+                j += 2
+            end
+
+            board_grid[i] = board_grid[i].join
+            j = 1
+            i += 2
+        end
+
+        puts board_grid
+        
+    end
 end
 
 =begin

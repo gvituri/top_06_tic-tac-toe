@@ -46,6 +46,6 @@ class Computer < Player
     end
 
     def make_move
-        #makes move
+        super
     end
 end

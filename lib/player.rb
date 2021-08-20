@@ -33,6 +33,7 @@ class Player
     end
 
     def setup_name
+        puts "Player #{(@@number_of_players + 1).to_s}"
         begin
             player_name = self.require_input(@@input_player[:require_name])
             unless @@players.empty? 
@@ -61,7 +62,12 @@ class Player
     end
 
     def make_move
-        #makes move
+        puts "#{self.name} makes a move."
+    end
+
+    def self.clear_players
+        @@players = {}
+        @@number_of_players = 0
     end
 end
 
