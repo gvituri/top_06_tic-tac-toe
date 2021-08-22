@@ -53,6 +53,7 @@ class Match
                     print e
                     retry
                 end
+                board.check_for_win(match_players[0].symbol)
                 match_players = match_players.reverse()
             end
             round_iterator += 1

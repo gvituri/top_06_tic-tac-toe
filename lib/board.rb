@@ -57,71 +57,80 @@ class Board
         input = raw_input.sort!
         input[0] = input[0].to_i
         input[1] = input[1].downcase
-        input.reverse!
-        case input[0]
+        case input[1]
             when "a"
-                input[0] = 0
+                input[1] = 0
             when "b"
-                input[0] = 1
+                input[1] = 1
             when "c"
-                input[0] = 2
+                input[1] = 2
         end
         return(input)
     end
-end
 
-=begin
-class Board
+    def check_for_win(played_symbol)
 
-    def validate_move(move)
-        current_board = current_board_coordinates
-        move = convert_move(move)
+        game_endend = false
 
-        if current_board[move[0]][move[1].to_i] == " "
-            return true
-        else
-            puts "Invalid move."
-            puts "Please try again:"
-            return false
+        #check rows
+
+        row_i = 0
+
+        @board.each do |row|
+            result = Hash.new(0)
+            row.each do |space|
+                result[space] += 1
+                result
+            end
+
+            if result[played_symbol] == 3
+                game_endend = true
+                puts "game has ended in row #{row_i}"
+                break
+            end
+
+            row_i += 1
         end
-    end
+        #check colomns
 
-    def register_move(move, player_symbol)
-        current_board = current_board_coordinates
-        move = convert_move(move)
-        #TODO MAKE THE ALTERATION ON THE BOARD TO DISPLAY THE MOVE
-    end
+        col_i = 0
 
-    def convert_move(move)
-        case move[0]
-            when "a"
-                move[0] = 0
-            when "b"
-                move[0] = 1
-            else
-                move[0] = 2
+        3.times do
+            result = Hash.new(0)
+            @board.each do |row|
+                result[row[col_i]] += 1
+            end
+
+            if result[played_symbol] == 3
+                game_endend = true
+                puts "game has ended in row #{col_i}"
+                break
+            end
+
+            col_i += 1
         end
 
-        return move
+        #check diagonals
 
+        diag_i = 0
+        diag_offset = 1
+
+        2.times do
+            result = Hash.new(0)
+            @board.each do |row|
+                result[row[diag_i]] += 1
+                diag_i += diag_offset
+            end
+
+            if result[played_symbol] == 3
+                game_endend = true
+                puts "game has ended in a diagonal"
+                break
+            end
+
+            diag_offset = -1
+        end
+
+        return game_endend
     end
-
-    def current_board_coordinates
-        coordinates = []
-        coordinates << [@board[1][1], @board[1][3], @board[1][5]]
-
-        coordinates << [@board[3][1], @board[3][3], @board[3][5]]
-
-        coordinates << [@board[5][1], @board[5][3], @board[5][5]]
-
-        return coordinates
-    end
-
 end
-
-#positions
-    #board[1][1] = A0,[1][3] = B0, [1][5] = C0
-    #board[3][1] = A1,[3][3] = B1, [3][5] = C1
-    #board[5][1] = A2,[5][3] = B2, [5][5] = C2
-
-=end
