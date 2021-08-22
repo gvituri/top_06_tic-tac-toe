@@ -10,6 +10,8 @@ module CheckInput
                 return is_symbol?(input)
             when "long"
                 return is_too_long?(input)
+            when "move"
+                return is_move_valid?(input)
         end
     end
 
@@ -34,5 +36,17 @@ module CheckInput
 
     def is_too_long?(input)
         return input.strip.length <= 10
+    end
+
+    def is_move_valid?(input)
+        input = input.downcase.split("")
+
+        unless input.length == 2
+            p "false"
+            return false
+        end
+
+        return (input[0].ord.between?(97, 99) && input[1].ord.between?(48, 50)) || (input[1].ord.between?(97, 99) && input[0].ord.between?(48, 50))
+
     end
 end

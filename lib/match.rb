@@ -44,7 +44,15 @@ class Match
             puts "Round #{round_iterator.to_s}."
             9.times do
                 board.display_board
-                match_players[0].make_move
+                begin
+                    move = match_players[0].make_move
+                    unless board.apply_move(move, match_players[0].symbol)
+                        raise "ERROR - Space already occupied."
+                    end
+                rescue => e
+                    print e
+                    retry
+                end
                 match_players = match_players.reverse()
             end
             round_iterator += 1

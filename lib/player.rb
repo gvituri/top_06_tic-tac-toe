@@ -22,6 +22,12 @@ class Player
             ["empty"],
             "ERROR - Input is not valid."
         ],
+        require_move: [
+            "move",
+            "Enter your move(ex: a1, B2, 2c, 0A).",
+            ["empty"],
+            "ERROR - Input is not valid."            
+        ]
     }
 
     def initialize
@@ -62,7 +68,8 @@ class Player
     end
 
     def make_move
-        puts "#{self.name} makes a move."
+        puts "#{self.name}, it is your turn."
+        return self.require_input(@@input_player[:require_move]).split("")
     end
 
     def self.clear_players

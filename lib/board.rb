@@ -12,11 +12,11 @@ class Board
     def display_board
         board_grid = [
             ["   A   B   C "],
-            ["0  ", " ", " | ", " ", " | ", " ", " "],
+            ["0  ", "(A0)", " | ", "(B0)", " | ", "(C0)", " "],
             ["  ---+---+---"],
-            ["1  ", " ", " | ", " ", " | ", " ", " "],
+            ["1  ", "(A1)", " | ", "(B1)", " | ", "(C1)", " "],
             ["  ---+---+---"],
-            ["2  ", " ", " | ", " ", " | ", " ", " "]
+            ["2  ", "(A2)", " | ", "(B2)", " | ", "(C2)", " "]
         ]
 
         i = 1
@@ -37,41 +37,41 @@ class Board
         puts board_grid
         
     end
+
+    def apply_move(player_move, player_symbol)
+        input = treat_input(player_move)
+        unless is_space_vacant?(input)
+            return false
+        end
+        
+        @board[input[0]][input[1]] = player_symbol
+
+        return true        
+    end
+
+    def is_space_vacant?(input)
+        return @board[input[0]][input[1]] == " "
+    end
+
+    def treat_input(raw_input)
+        input = raw_input.sort!
+        input[0] = input[0].to_i
+        input[1] = input[1].downcase
+        input.reverse!
+        case input[0]
+            when "a"
+                input[0] = 0
+            when "b"
+                input[0] = 1
+            when "c"
+                input[0] = 2
+        end
+        return(input)
+    end
 end
 
 =begin
 class Board
-
-    attr_accessor :board
-
-    def initialize
-        @board = clear_board
-    end
-
-    def assemble_board(positions)
-
-    end
-
-    def clear_board
-        return [
-            ["   A   B   C "],
-            ["0  ", " ", " | ", " ", " | ", " ", " "],
-            ["  ---+---+---"],
-            ["1  ", " ", " | ", " ", " | ", " ", " "],
-            ["  ---+---+---"],
-            ["2  ", " ", " | ", " ", " | ", " ", " "],
-        ]
-    end
-
-    def print_board
-        puts "\n"
-        puts @board[0]
-        puts @board[1].join
-        puts @board[2]
-        puts @board[3].join
-        puts @board[4]
-        puts @board[5].join
-    end
 
     def validate_move(move)
         current_board = current_board_coordinates

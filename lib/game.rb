@@ -15,8 +15,8 @@ module Game
             computer = Computer.new
             @@match_players << computer
         else
-            @@match_players << player1
             player2 = Player.new
+            @@match_players << player2
         end
 
         match.start_match(@@match_players)
