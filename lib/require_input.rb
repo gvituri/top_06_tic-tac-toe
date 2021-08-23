@@ -4,6 +4,7 @@ module RequireInput
         begin
             puts input_info[1]
             input = gets.chomp
+            puts "\n"
             unless self.check_input(input_info[0], input, input_info[2])
                 raise input_info[3]
             end

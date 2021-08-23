@@ -35,15 +35,23 @@ class Match
     end
 
     def start_match(match_players)
+        system "clear"
         setup_scores(match_players)
         board = Board.new
 
         round_iterator = 1
 
         self.round_number.times do
-            puts "Round #{round_iterator.to_s}."
-            9.times do
+            system "clear"
+            round_winner = nil
+            winning_mode = nil
+            mode_iterator = nil
+
+            loop do
+                system "clear"
+                puts "Round #{round_iterator.to_s}\n"
                 board.display_board
+
                 begin
                     move = match_players[0].make_move
                     unless board.apply_move(move, match_players[0].symbol)
@@ -53,10 +61,25 @@ class Match
                     print e
                     retry
                 end
-                board.check_for_win(match_players[0].symbol)
+
+                win_check = board.check_for_win(match_players[0].symbol)
+                winning_mode = win_check[1]
+                mode_iterator = win_check[2]
+                break if win_check[0]
                 match_players = match_players.reverse()
             end
+
+            system "clear"
+            round_winner = match_players[0].name
+            @score[match_players[0].name.to_sym] += 1
+            board.show_winning_board(round_winner, winning_mode, mode_iterator)
+
+            puts @score
+
             round_iterator += 1
+
+            board.reset_board
         end
+        
     end
 end
