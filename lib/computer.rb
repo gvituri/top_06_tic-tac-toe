@@ -4,21 +4,10 @@ require_relative 'check_input.rb'
 class Computer < Player
     include RequireInput
     include CheckInput
-    attr_accessor :name, :symbol, :level
-
-    @@input_computer = {
-        require_level: [
-            "dictionary",
-            "Computer level: easy, medium or hard?.",
-            ["easy", "medium", "hard"],
-            "ERROR - Input has no match."
-        ],
-    }
+    attr_accessor :name, :symbol
 
     def initialize
         super
-        @level = self.require_input(@@input_computer[:require_level])
-
         @@players["computer"] = [@name, @symbol]
     end
 
@@ -49,6 +38,8 @@ class Computer < Player
         columns = ["a", "b", "c"]
         rows = ["0", "1", "2"] 
 
-        return[columns.sample, rows.sample]
+        return [columns.sample, rows.sample]
     end
+
 end
+

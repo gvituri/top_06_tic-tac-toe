@@ -1,5 +1,5 @@
 class Board
-    attr_reader :name, :symbol, :level
+    attr_reader :board
 
     def initialize
         @board = reset_board

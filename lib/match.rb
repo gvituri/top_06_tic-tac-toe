@@ -20,6 +20,12 @@ class Match
             ["empty"],
             "ERROR - Input is not a positive integer."
         ],
+        require_rematch: [
+            "dictionary",
+            "Rematch?(yes or no)",
+            ["yes", "y", "no", "n"],
+            "Error - Input has no match."
+        ]
     }
 
     def initialize
@@ -81,18 +87,46 @@ class Match
                 board.show_winning_board("No one", winning_mode, mode_iterator)  
             end
 
-
-            puts @score
-
             round_iterator += 1
 
             board.reset_board
         end
+
+        anounce_match_winner
+        ask_for_rematch(match_players)
+        @score = {}
         
     end
 
     def pick_first_player(match_players)
         match_players << match_players.delete_at(rand(2))
         return match_players
+    end
+
+    def anounce_match_winner
+        system "clear"
+
+        if @score.values[0] == @score.values[1]
+            puts "The match has ended in a draw!"
+            return
+        end
+
+        winner = @score.keys[0]
+        points = @score.values[0]
+        puts "#{winner} won the match"
+        puts "with a score of #{points}!"
+        sleep(3)
+        
+    end
+
+    def ask_for_rematch(match_players)
+        system "clear"
+        input = self.require_input(@@input_match[:require_rematch])
+        case input
+            when "yes", "y"
+                start_match(match_players)
+            when "no", "n"
+                return
+        end
     end
 end
