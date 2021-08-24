@@ -65,7 +65,7 @@ class Board
     end
 
     def check_for_win(played_symbol)
-
+        draw_check = check_draw
         row_check = check_rows(played_symbol)
         column_check = check_columns(played_symbol)
         diagonal_check = check_diagonals(played_symbol)
@@ -76,9 +76,29 @@ class Board
             return [true, "column", column_check[1]]
         elsif diagonal_check[0]
             return [true, "diagonal", diagonal_check[1]]        
+        elsif draw_check
+            return [true, "draw", nil]
         end
 
         return [false, nil, nil]
+
+    end
+
+    def check_draw
+        game_endend = false
+
+        result = Hash.new(0)
+        @board.each do |row|
+            row.each do |space|
+                result[space] += 1
+            end
+        end
+
+        if result[" "] == 0
+            game_endend = true
+        end
+
+        return(game_endend)
 
     end
 
@@ -172,6 +192,12 @@ class Board
                     row[i] = iterator < 0 ? line[1] : line[0]
                     i += iterator
                 end
+            when "draw"
+                crossed_board = [
+                    ["-", "-", "-"],
+                    ["-", "-", "-"],
+                    ["-", "-", "-"]
+                ]
         end            
 
         5.times do

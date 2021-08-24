@@ -46,6 +46,9 @@ class Computer < Player
     end
 
     def make_move
-        super
+        columns = ["a", "b", "c"]
+        rows = ["0", "1", "2"] 
+
+        return[columns.sample, rows.sample]
     end
 end

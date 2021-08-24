@@ -43,6 +43,7 @@ class Match
 
         self.round_number.times do
             system "clear"
+            match_players = pick_first_player(match_players)
             round_winner = nil
             winning_mode = nil
             mode_iterator = nil
@@ -54,6 +55,7 @@ class Match
 
                 begin
                     move = match_players[0].make_move
+
                     unless board.apply_move(move, match_players[0].symbol)
                         raise "ERROR - Space already occupied."
                     end
@@ -70,9 +72,15 @@ class Match
             end
 
             system "clear"
-            round_winner = match_players[0].name
-            @score[match_players[0].name.to_sym] += 1
-            board.show_winning_board(round_winner, winning_mode, mode_iterator)
+
+            unless winning_mode == "draw"
+                round_winner = match_players[0].name
+                @score[match_players[0].name.to_sym] += 1
+                board.show_winning_board(round_winner, winning_mode, mode_iterator)          
+            else
+                board.show_winning_board("No one", winning_mode, mode_iterator)  
+            end
+
 
             puts @score
 
@@ -81,5 +89,10 @@ class Match
             board.reset_board
         end
         
+    end
+
+    def pick_first_player(match_players)
+        match_players << match_players.delete_at(rand(2))
+        return match_players
     end
 end
